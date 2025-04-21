@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -16,6 +18,7 @@ import static dev.programing.moneycontrol.utils.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Tag(name = "Categorias", description = "Gerenciamento da Categoria de ativos")
+@Validated
 public interface CategoriaDocumentation {
 
     @Operation(summary = "Criar Categoria", description = "Cria nova categoria de ativo")
@@ -26,7 +29,7 @@ public interface CategoriaDocumentation {
             @ApiResponse(responseCode = NOT_FOUND_CODE, description = NOT_FOUND, content = @Content(mediaType = APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = BAD_REQUEST_CODE, description = BAD_REQUEST, content = @Content(mediaType = APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = INTERNAL_SERVER_ERROR_CODE, description = INTERNAL_SERVER_ERROR, content = @Content(mediaType = APPLICATION_JSON_VALUE))})
-    public Mono<CategoriaResponseDTO> criarCategoria(CategoriaRequestDTO requestDTO);
+    public Mono<CategoriaResponseDTO> criarCategoria(@Valid CategoriaRequestDTO requestDTO);
 
     @Operation(summary = "Consultar Categorias", description = "Consulta as categorias dos ativos")
     @ApiResponses(value = {
