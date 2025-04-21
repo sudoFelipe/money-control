@@ -9,6 +9,7 @@ spring:
   mvc:
     problemdetails:
       enabled: true
+
 springdoc:
-  api-docs:
-    path: /api-docs
+  swagger-ui:
+    disable-swagger-default-url: true

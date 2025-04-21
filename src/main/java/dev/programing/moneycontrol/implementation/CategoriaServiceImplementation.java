@@ -21,12 +21,17 @@ public class CategoriaServiceImplementation implements CategoriaService {
 
     @Override
     public Mono<CategoriaResponseDTO> cadastrarCategoria(CategoriaRequestDTO requestDTO) {
-        return this.repository.save(this.converter.toPersistirCategoria(requestDTO))
+        return this.repository.save(this.converter.toSaveCategoria(requestDTO))
                 .map(this.converter::toResponseDTO);
     }
 
     @Override
     public Flux<CategoriaResponseDTO> recuperarCategorias() {
         return this.repository.findAll().map(this.converter::toResponseDTO);
+    }
+
+    @Override
+    public Mono<Void> removerCategoria(String idCategoria) {
+        return this.repository.findById(idCategoria).flatMap(this.repository::delete);
     }
 }

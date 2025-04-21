@@ -10,4 +10,6 @@ public interface CategoriaService {
     Mono<CategoriaResponseDTO> cadastrarCategoria(CategoriaRequestDTO requestDTO);
 
     Flux<CategoriaResponseDTO> recuperarCategorias();
+
+    Mono<Void> removerCategoria(String idCategoria);
 }

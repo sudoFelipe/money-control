@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/api/categoria")
+@RequestMapping("/api/v1/categoria")
 @RequiredArgsConstructor
 public class CategoriaController implements CategoriaDocumentation {
 
@@ -28,5 +28,11 @@ public class CategoriaController implements CategoriaDocumentation {
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public Flux<CategoriaResponseDTO> consultarCategorias() {
         return this.service.recuperarCategorias();
+    }
+
+    @Override
+    @DeleteMapping("/{id}")
+    public Mono<Void> removerCategoria(@PathVariable(value = "id") String idCategoria) {
+        return this.service.removerCategoria(idCategoria);
     }
 }

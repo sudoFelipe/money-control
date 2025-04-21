@@ -13,6 +13,7 @@ public class HttpStatus {
 
     public static final String CREATED_CODE = "201";
     public static final String SUCCESS_CODE = "200";
+    public static final String SUCCESS_NO_CONTENT_CODE = "204";
     public static final String BAD_REQUEST_CODE = "400";
     public static final String NOT_FOUND_CODE = "404";
     public static final String INTERNAL_SERVER_ERROR_CODE = "500";
