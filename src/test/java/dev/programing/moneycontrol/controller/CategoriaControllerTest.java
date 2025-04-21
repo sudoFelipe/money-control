@@ -14,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @AutoConfigureWebTestClient
 class CategoriaControllerTest {
 
-    private static String URL_DEFAULT = "/api/v1/categoria";
+    private static final String URL_DEFAULT = "/api/v1/categoria";
 
     @Autowired
     private WebTestClient clientTest;
