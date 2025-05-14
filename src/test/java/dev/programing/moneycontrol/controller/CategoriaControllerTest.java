@@ -44,7 +44,7 @@ class CategoriaControllerTest {
     @Test
     void removerCategoria() {
         this.clientTest.delete()
-                .uri(URL_DEFAULT.concat("/{id}"), 1)
+                .uri(URL_DEFAULT.concat("/{id}"), "idteste12jfaksj")
                 .exchange()
                 .expectStatus()
                 .is2xxSuccessful();

@@ -5,7 +5,8 @@ import dev.programing.moneycontrol.dto.requests.CategoriaRequestDTO;
 import dev.programing.moneycontrol.dto.responses.CategoriaResponseDTO;
 import dev.programing.moneycontrol.model.Categoria;
 import dev.programing.moneycontrol.repository.CategoriaRepository;
-import dev.programing.moneycontrol.utils.MockUnitTest;
+import dev.programing.moneycontrol.MockUnitTest;
+import dev.programing.moneycontrol.service.implementation.CategoriaServiceImplementation;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,7 +16,6 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -33,9 +33,9 @@ class CategoriaServiceImplementationTest extends MockUnitTest {
 
     @Test
     void deveCadastrarCategoriaComSucesso() {
-        final var categoria = Categoria.builder().id("1").descricao("Teste").sigla("TT").build();
-        final var requestDTO = CategoriaRequestDTO.builder().descricao("Teste").sigla("TT").build();
-        final var responseDTO = CategoriaResponseDTO.builder().descricao("Teste").sigla("TT").build();
+        final var categoria = obterDadosJsonPath(CATEGORIA_JSON_PATH, Categoria.class);
+        final var requestDTO = obterDadosJsonPath(CATEGORIA_REQUEST_JSON_PATH, CategoriaRequestDTO.class);;
+        final var responseDTO = obterDadosJsonPath(CATEGORIA_RESPONSE_JSON_PATH, CategoriaResponseDTO.class);;
         when(this.converter.toSaveCategoria(any())).thenReturn(categoria);
         when(this.converter.toResponseDTO(any())).thenReturn(responseDTO);
         when(this.repository.save(any())).thenReturn(Mono.just(categoria));
@@ -53,8 +53,8 @@ class CategoriaServiceImplementationTest extends MockUnitTest {
 
     @Test
     void deveRecuperarCategoriasComSucesso() {
-        final var categoria = Categoria.builder().id("1").descricao("Teste").sigla("TT").build();
-        final var responseDTO = CategoriaResponseDTO.builder().descricao("Teste").sigla("TT").build();
+        final var categoria = obterDadosJsonPath(CATEGORIA_JSON_PATH, Categoria.class);;
+        final var responseDTO = obterDadosJsonPath(CATEGORIA_RESPONSE_JSON_PATH, CategoriaResponseDTO.class);;
         when(this.repository.findAll()).thenReturn(Flux.just(categoria));
         when(this.converter.toResponseDTO(any())).thenReturn(responseDTO);
 
@@ -70,7 +70,7 @@ class CategoriaServiceImplementationTest extends MockUnitTest {
 
     @Test
     void deveRemoverCategoriaComSucesso() {
-        final var categoria = Categoria.builder().id("1").descricao("Teste").sigla("TT").build();
+        final var categoria = obterDadosJsonPath(CATEGORIA_JSON_PATH, Categoria.class);;
         when(this.repository.findById(anyString())).thenReturn(Mono.just(categoria));
         StepVerifier.create(this.service.removerCategoria("1")).expectComplete();
     }

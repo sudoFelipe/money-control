@@ -1,8 +1,10 @@
-package dev.programing.moneycontrol.implementation;
+package dev.programing.moneycontrol.service.implementation;
 
 import dev.programing.moneycontrol.converter.CategoriaConverter;
 import dev.programing.moneycontrol.dto.requests.CategoriaRequestDTO;
 import dev.programing.moneycontrol.dto.responses.CategoriaResponseDTO;
+import dev.programing.moneycontrol.exception.CategoriaNotFoundException;
+import dev.programing.moneycontrol.model.Categoria;
 import dev.programing.moneycontrol.repository.CategoriaRepository;
 import dev.programing.moneycontrol.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +34,14 @@ public class CategoriaServiceImplementation implements CategoriaService {
 
     @Override
     public Mono<Void> removerCategoria(String idCategoria) {
-        return this.repository.findById(idCategoria).flatMap(this.repository::delete);
+        return this.repository.findById(idCategoria)
+                .flatMap(this.repository::delete)
+                .switchIfEmpty(Mono.error(CategoriaNotFoundException::new));
+    }
+
+    @Override
+    public Mono<Categoria> recuperarCategoriaPorId(String idCategoria) {
+        return this.repository.findById(idCategoria)
+                .switchIfEmpty(Mono.error(CategoriaNotFoundException::new));
     }
 }
