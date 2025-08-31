@@ -3,13 +3,65 @@ spring:
     name: money-control
   data:
     mongodb:
-      database: test
+      database: money-control
       host: localhost
       port: 27017
   mvc:
     problemdetails:
       enabled: true
+  messages:
+    basename: validation-messages
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    inicialization-mode: always
+  batch:
+    initialize-schema: always
+  cloud:
+    stream:
+      kafka:
+        binder:
+          auto-create-topics: true
+      binder:
+        broker: localhost:9092
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              package: dev.programming.moneycontrol.model
+  security:
+    oauth2:
+      client:
+        registration:
+          finance:
+            client-id: arrecadacao-ms-isencao-flow
+            client-secret: o5viLPfoNQI4MDcCq6kwNwJC2zyrdmcS
+            authorization-grant-type: client_credentials
+        provider:
+          finance:
+            token-uri: https://keycloak-hom.fazenda.mg.gov.br/realms/intranet/protocol/openid-connect/token
+            refresh-token-uri: https://keycloak-hom.fazenda.mg.gov.br/realms/intranet/protocol/openid-connect/token
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://keycloak-hom.fazenda.mg.gov.br/realms/intranet/protocol/openid-connect/certs
+kafka:
+  task:
+    notification-output: transaction-notification-v1
 
 springdoc:
   swagger-ui:
     disable-swagger-default-url: true
+
+security:
+  enabled: false
+
+#API's
+api-consumer:
+  brapi-finance: https://brapi.dev

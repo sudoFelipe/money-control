@@ -18,4 +18,6 @@ public class Ativo {
     private String descricao;
     private String cnpj;
     private Categoria categoria;
+    private String linkImagem;
+    private String moeda;
 }

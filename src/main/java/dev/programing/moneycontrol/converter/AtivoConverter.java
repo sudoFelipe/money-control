@@ -1,5 +1,6 @@
 package dev.programing.moneycontrol.converter;
 
+import dev.programing.moneycontrol.dto.AtivoFinanceDTO;
 import dev.programing.moneycontrol.dto.requests.AtivoRequestDTO;
 import dev.programing.moneycontrol.dto.responses.AtivoResponseDTO;
 import dev.programing.moneycontrol.dto.responses.CategoriaResponseDTO;
@@ -13,12 +14,14 @@ import org.springframework.stereotype.Component;
 public class AtivoConverter {
 
 
-    public Ativo toAtivoDTO(AtivoRequestDTO requestDTO, Categoria categoria) {
+    public Ativo toAtivo(AtivoRequestDTO requestDTO, AtivoFinanceDTO ativo, Categoria categoria) {
         return Ativo.builder()
+                .ticker(ativo.getTicker())
+                .descricao(ativo.getNome())
                 .cnpj(requestDTO.cnpj())
-                .ticker(requestDTO.ticker())
-                .descricao(requestDTO.descricao())
                 .categoria(categoria)
+                .linkImagem(ativo.getImagemAtivo())
+                .moeda(ativo.getMoeda().toString())
                 .build();
     }
 
@@ -28,6 +31,8 @@ public class AtivoConverter {
                 .ticker(ativo.getTicker())
                 .cnpj(ativo.getCnpj())
                 .categoria(toCategoriaResponseDTO(ativo.getCategoria()))
+                .imagem(ativo.getLinkImagem())
+                .moeda(ativo.getMoeda())
                 .build();
     }
 

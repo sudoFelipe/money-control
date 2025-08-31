@@ -10,6 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -33,8 +34,9 @@ public class CategoriaController implements CategoriaDocumentation {
     }
 
     @Override
-    @DeleteMapping("/{id}")
-    public Mono<Void> removerCategoria(@PathVariable(value = "id") String idCategoria) {
+    @ResponseStatus(NO_CONTENT)
+    @DeleteMapping(path = "/{idCategoria}")
+    public Mono<Void> removerCategoria(@PathVariable String idCategoria) {
         return this.service.removerCategoria(idCategoria);
     }
 }

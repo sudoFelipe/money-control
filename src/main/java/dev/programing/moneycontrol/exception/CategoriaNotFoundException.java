@@ -3,6 +3,6 @@ package dev.programing.moneycontrol.exception;
 public class CategoriaNotFoundException extends RuntimeException {
 
     public CategoriaNotFoundException() {
-        super("");
+        super("Categoria não encontrada");
     }
 }

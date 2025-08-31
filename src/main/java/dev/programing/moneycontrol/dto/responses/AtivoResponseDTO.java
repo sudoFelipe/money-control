@@ -1,7 +1,6 @@
 package dev.programing.moneycontrol.dto.responses;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import dev.programing.moneycontrol.model.Categoria;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +29,10 @@ public class AtivoResponseDTO {
     private String cnpj;
 
     private CategoriaResponseDTO categoria;
+
+    @Schema(description = "Link de visualização da imagem", defaultValue = "https://icons.brapi.dev/icons/KLBN4.svg")
+    private String imagem;
+
+    @Schema(description = "Tipo de moeda relacionada ao ativo", defaultValue = "BRL")
+    private String moeda;
 }

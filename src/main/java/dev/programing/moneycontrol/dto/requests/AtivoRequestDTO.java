@@ -1,25 +1,17 @@
 package dev.programing.moneycontrol.dto.requests;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 public record AtivoRequestDTO(
 
-        @NotBlank
-        @NotNull
+        @NotBlank(message = "O campo ticker é obrigatório")
         String ticker,
 
-        @NotBlank
-        @NotNull
-        String descricao,
-
-        @NotBlank
-        @NotNull
-        @CNPJ
+        @NotBlank(message = "O campo CNPJ é obrigatório")
+        @CNPJ(message = "O campo CNPJ é inválido")
         String cnpj,
 
-        @NotBlank
-        @NotNull
+        @NotBlank(message = "O campo idCategoria é obrigatório")
         String idCategoria
 ) {}

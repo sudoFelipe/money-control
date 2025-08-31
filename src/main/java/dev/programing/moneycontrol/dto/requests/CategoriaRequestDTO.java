@@ -7,11 +7,11 @@ import lombok.Builder;
 @Builder
 public record CategoriaRequestDTO(
 
-        @NotNull(message = "O campo descrição é obrigatório")
-        @NotBlank(message = "O campo descrição não pode ser vazio")
+        @NotNull(message = "{required.descricao}")
+        @NotBlank(message = "{blank.descricao}")
         String descricao,
 
-        @NotNull(message = "O campo descrição é obrigatório")
-        @NotBlank(message = "O campo descrição não pode ser vazio")
+        @NotNull(message = "{required.sigla}")
+        @NotBlank(message = "{blank.sigla}")
         String sigla
 ) {}

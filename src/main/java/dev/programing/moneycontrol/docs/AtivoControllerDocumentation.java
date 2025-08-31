@@ -16,10 +16,9 @@ import static dev.programing.moneycontrol.utils.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Tag(name = "Ativos", description = "Gerenciamento dos Ativos")
-@Validated
 public interface AtivoControllerDocumentation {
 
-    @Operation(summary = "Cadastro de ativo", description = "Cadastra um novo ativo")
+    @Operation(summary = "Adicionar novo ativo", description = "Adiciona novo ativo na carteira de investimentos")
     @ApiResponses(value = {
             @ApiResponse(responseCode = CREATED_CODE, description = CREATED, content =
                     { @Content(mediaType = APPLICATION_JSON_VALUE, schema =
@@ -27,5 +26,5 @@ public interface AtivoControllerDocumentation {
             @ApiResponse(responseCode = NOT_FOUND_CODE, description = NOT_FOUND, content = @Content(mediaType = APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = BAD_REQUEST_CODE, description = BAD_REQUEST, content = @Content(mediaType = APPLICATION_JSON_VALUE)),
             @ApiResponse(responseCode = INTERNAL_SERVER_ERROR_CODE, description = INTERNAL_SERVER_ERROR, content = @Content(mediaType = APPLICATION_JSON_VALUE))})
-    public Mono<AtivoResponseDTO> cadastrarAtivo(@Valid AtivoRequestDTO requestDTO);
+    public Mono<AtivoResponseDTO> AdicionarAtivo(AtivoRequestDTO requestDTO);
 }

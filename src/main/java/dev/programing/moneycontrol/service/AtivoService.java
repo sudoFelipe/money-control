@@ -6,5 +6,5 @@ import reactor.core.publisher.Mono;
 
 public interface AtivoService {
 
-    Mono<AtivoResponseDTO> cadastrarNovoAtivo(AtivoRequestDTO requestDTO);
+    Mono<AtivoResponseDTO> adicionarAtivo(AtivoRequestDTO requestDTO);
 }
