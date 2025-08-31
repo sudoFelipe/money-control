@@ -1,9 +1,9 @@
 package dev.programing.moneycontrol.handler.signature;
 
-import dev.programing.moneycontrol.dto.AtivoFinanceDTO;
+import dev.programing.moneycontrol.client.finance.dto.AtivoFinanceResponseDTO;
 import reactor.core.publisher.Mono;
 
 public interface FinanceHandler {
 
-    Mono<AtivoFinanceDTO> recuperarAtivo(String ticker);
+    Mono<AtivoFinanceResponseDTO> recuperarAtivo(String ticker);
 }

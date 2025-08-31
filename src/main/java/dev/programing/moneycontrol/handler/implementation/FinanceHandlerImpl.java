@@ -1,6 +1,7 @@
 package dev.programing.moneycontrol.handler.implementation;
 
-import dev.programing.moneycontrol.client.FinanceClient;
+import dev.programing.moneycontrol.client.finance.FinanceClient;
+import dev.programing.moneycontrol.client.finance.dto.AtivoFinanceResponseDTO;
 import dev.programing.moneycontrol.dto.AtivoFinanceDTO;
 import dev.programing.moneycontrol.exception.AtivoInvalidoException;
 import dev.programing.moneycontrol.exception.AtivoNotFoundException;
@@ -23,7 +24,7 @@ public class FinanceHandlerImpl implements FinanceHandler {
     private final FinanceClient client;
 
     @Override
-    public Mono<AtivoFinanceDTO> recuperarAtivo(String ticker) {
+    public Mono<AtivoFinanceResponseDTO> recuperarAtivo(String ticker) {
         return this.client.recuperarAtivoFinanceiro(ticker)
                 .onErrorResume(WebClientResponseException.class, ex -> {
                     if (NOT_FOUND.isSameCodeAs(ex.getStatusCode())) {

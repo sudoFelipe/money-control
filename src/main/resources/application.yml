@@ -41,16 +41,16 @@ spring:
       client:
         registration:
           finance:
-            client-id: arrecadacao-ms-isencao-flow
-            client-secret: o5viLPfoNQI4MDcCq6kwNwJC2zyrdmcS
+            client-id: client
+            client-secret: secret
             authorization-grant-type: client_credentials
         provider:
           finance:
-            token-uri: https://keycloak-hom.fazenda.mg.gov.br/realms/intranet/protocol/openid-connect/token
-            refresh-token-uri: https://keycloak-hom.fazenda.mg.gov.br/realms/intranet/protocol/openid-connect/token
+            token-uri: https://url-to-get-token
+            refresh-token-uri: https://url-to-get-token
       resourceserver:
         jwt:
-          jwk-set-uri: https://keycloak-hom.fazenda.mg.gov.br/realms/intranet/protocol/openid-connect/certs
+          jwk-set-uri: https://url-default-auth
 kafka:
   task:
     notification-output: transaction-notification-v1
@@ -65,3 +65,4 @@ security:
 #API's
 api-consumer:
   brapi-finance: https://brapi.dev
+  token: ${TOKEN}

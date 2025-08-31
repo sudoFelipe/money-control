@@ -19,6 +19,10 @@ public class WebClientManagerConfiguration {
         return buildWebClient(null,baseUrl, clientClass, null, sslCheck);
     }
 
+    protected <T> T buildWebClient(String baseUrl, Class<T> clientClass, String token){
+        return buildWebClientToken(baseUrl, clientClass, null, token);
+    }
+
     protected <T> T buildWebClient(String registrationId, String baseUrl, Class<T> clientClass, boolean sslCheck){
         return buildWebClient(registrationId, baseUrl, clientClass, null, sslCheck);
     }
@@ -27,6 +31,11 @@ public class WebClientManagerConfiguration {
 
         return HttpServiceProxyFactory.builderFor(sslCheck ? createWebClientAdapterWithSslInternal(baseUrl, registrationId, maxInMemorySize) : createWebClientAdapter(baseUrl, registrationId, maxInMemorySize))
                 .build().createClient(clientClass);
+    }
+
+    protected <T> T buildWebClientToken(String baseUrl, Class<T> clientClass, Integer maxInMemorySize, String token) {
+
+        return HttpServiceProxyFactory.builderFor(createBasicWebClient(baseUrl, token, maxInMemorySize)).build().createClient(clientClass);
     }
 
     private WebClient.Builder createWebClientWithOAuth(String baseUrl, String registrationId, Integer maxInMemorySize){
@@ -83,5 +92,21 @@ public class WebClientManagerConfiguration {
             webClientBuilder = createWebClientWithoutOAuth(baseUrl, maxInMemorySize);
         }
         return WebClientAdapter.create(webClientBuilder.build());
+    }
+
+    private WebClientAdapter createBasicWebClient(String baseUrl, String token, Integer maxInMemorySize) {
+
+        var webClient = WebClient
+                .builder()
+                .defaultHeader("Authorization", token)
+                .baseUrl(baseUrl);
+
+        if (maxInMemorySize != null){
+            webClient.codecs(codecs -> codecs
+                    .defaultCodecs()
+                    .maxInMemorySize(maxInMemorySize));
+        }
+
+        return WebClientAdapter.create(webClient.build());
     }
 }

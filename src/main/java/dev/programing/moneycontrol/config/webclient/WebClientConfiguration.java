@@ -1,6 +1,6 @@
 package dev.programing.moneycontrol.config.webclient;
 
-import dev.programing.moneycontrol.client.FinanceClient;
+import dev.programing.moneycontrol.client.finance.FinanceClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientSsl;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ public class WebClientConfiguration extends WebClientManagerConfiguration {
 
 
     @Bean
-    public FinanceClient getFinanceClient(@Value("${api-consumer.brapi-finance}") String baseUrl) {
-        return buildWebClient(REGISTRATION_ID, baseUrl, FinanceClient.class, false);
+    public FinanceClient getFinanceClient(@Value("${api-consumer.brapi-finance}") String baseUrl, @Value("${api-consumer.token}") String bearer) {
+        return buildWebClient(baseUrl, FinanceClient.class, bearer);
     }
 }

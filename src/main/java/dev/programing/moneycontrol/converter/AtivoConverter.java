@@ -1,5 +1,6 @@
 package dev.programing.moneycontrol.converter;
 
+import dev.programing.moneycontrol.client.finance.dto.AtivoFinanceResponseDTO;
 import dev.programing.moneycontrol.dto.AtivoFinanceDTO;
 import dev.programing.moneycontrol.dto.requests.AtivoRequestDTO;
 import dev.programing.moneycontrol.dto.responses.AtivoResponseDTO;
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Component;
 public class AtivoConverter {
 
 
-    public Ativo toAtivo(AtivoRequestDTO requestDTO, AtivoFinanceDTO ativo, Categoria categoria) {
+    public Ativo toAtivo(AtivoRequestDTO requestDTO, AtivoFinanceResponseDTO response, Categoria categoria) {
+        final var ativo = response.getResults().getFirst();
         return Ativo.builder()
                 .ticker(ativo.getTicker())
                 .descricao(ativo.getNome())
